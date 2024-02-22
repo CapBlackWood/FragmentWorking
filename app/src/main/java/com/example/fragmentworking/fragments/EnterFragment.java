@@ -1,7 +1,9 @@
 package com.example.fragmentworking.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -11,13 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fragmentworking.MapActivity;
 import com.example.fragmentworking.R;
 import com.example.fragmentworking.adapter.ChooseAdapter;
 import com.example.fragmentworking.models.Model;
 
 import java.util.ArrayList;
 
-public class EnterFragment extends Fragment {
+public class EnterFragment extends Fragment implements  View.OnTouchListener{
 
     private RecyclerView recyclerView;
 
@@ -40,5 +43,19 @@ public class EnterFragment extends Fragment {
         ChooseAdapter adapter = new ChooseAdapter(getActivity(), models);  // Адаптер для связи списками моделей и разметки
         recyclerView.setAdapter(adapter);    //Назначаем адаптер списку разметки
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));   // Назначаем менеджера компановки (способо отображения элементов списка)
+        adapter.setListener(new ChooseAdapter.OnItemClickListener() {  //Назначаем слушателя списка
+            @Override
+            public void onItemClick(int position) {
+                if (position == 2){
+                    Intent intent = new Intent(getActivity(), MapActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
 }
