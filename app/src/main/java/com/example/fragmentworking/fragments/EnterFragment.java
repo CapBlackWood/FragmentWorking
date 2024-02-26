@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,9 @@ import java.util.ArrayList;
 public class EnterFragment extends Fragment implements  View.OnTouchListener{
 
     private RecyclerView recyclerView;
+
+    private FragmentManager fragmentManager;
+    private Fragment fragment;
 
     @Nullable
     @Override
@@ -49,6 +53,13 @@ public class EnterFragment extends Fragment implements  View.OnTouchListener{
                 if (position == 2){
                     Intent intent = new Intent(getActivity(), MapActivity.class);
                     startActivity(intent);
+                } else if (position==0) {
+                    fragmentManager = getParentFragmentManager(); // Получаем родительский менеджер фрагментов
+                    fragment = new DrinksFragment();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
+
                 }
             }
         });
