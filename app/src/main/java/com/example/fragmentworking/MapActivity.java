@@ -128,7 +128,7 @@ public class MapActivity extends AppCompatActivity {
             Log.d("Координаты y: ", " " + currentTranslateY + " " + diffY);
             Log.d("Координаты x: ", " " + currentTranslateX + " " + diffX);
 
-            // if(Math.abs(diffX)> 150 || Math.abs(diffY)>150) {         // Опять назначаем анимацию для картинки
+             if(Math.abs(diffX)> 150 || Math.abs(diffY)>150) {         // Опять назначаем анимацию для картинки
             ObjectAnimator translateXAnimator = ObjectAnimator.ofFloat(this,"translateX", currentTranslateX, newTranslateX);
             ObjectAnimator translateYAnimator = ObjectAnimator.ofFloat(this,"translateY", currentTranslateY, newTranslateY);
 
@@ -138,7 +138,7 @@ public class MapActivity extends AppCompatActivity {
             animatorSet.setInterpolator(new DecelerateInterpolator());
 
             animatorSet.start();
-            //   }
+               }
             return true;
         }
 
@@ -146,7 +146,7 @@ public class MapActivity extends AppCompatActivity {
 
         public void setTranslateX(float translateX){
             currentTranslateX = translateX;
-            matrix.postTranslate(translateX,currentTranslateY);
+            matrix.setTranslate(translateX,currentTranslateY);
             imageView.setImageMatrix(matrix);
         }
 

@@ -57,9 +57,17 @@ public class EnterFragment extends Fragment implements  View.OnTouchListener{
                     fragmentManager = getParentFragmentManager(); // Получаем родительский менеджер фрагментов
                     fragment = new DrinksFragment();
                     fragmentManager.beginTransaction()
+                            .addToBackStack("Enter")        // Сохраняем фрагмент
                             .replace(R.id.fragment_container, fragment)
                             .commit();
-
+                }
+                else if (position==1){
+                    fragmentManager = getParentFragmentManager(); // Получаем родительский менеджер фрагментов
+                    fragment = new FoodFragment();
+                    fragmentManager.beginTransaction()
+                            .addToBackStack("Enter")
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
                 }
             }
         });

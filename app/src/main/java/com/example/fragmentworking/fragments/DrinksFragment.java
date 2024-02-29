@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,14 +14,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fragmentworking.R;
+import com.example.fragmentworking.Repository;
 import com.example.fragmentworking.adapter.MenuAdapter;
 import com.example.fragmentworking.models.MenuItem;
 
 import java.util.ArrayList;
 
-public class DrinksFragment extends Fragment {
+public class DrinksFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
+    private Button btnBack;
 
     @Nullable
     @Override
@@ -33,6 +36,8 @@ public class DrinksFragment extends Fragment {
 
     private void init(View view) {
         recyclerView = view.findViewById(R.id.drinks_list);
+        btnBack = view.findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(this);
 
         ArrayList<MenuItem> drinks = new ArrayList<>();
         drinks.add(new MenuItem("Пина Колада", R.drawable.cocktail_1, "Легкий и невероятно " +
@@ -56,6 +61,7 @@ public class DrinksFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
+
     }
 
     private int countSum(ArrayList<MenuItem> orders) {
@@ -64,5 +70,18 @@ public class DrinksFragment extends Fragment {
             res += orders.get(i).getPrice();
         }
         return res;
+    }
+/*
+Стек - структура данных работающая по принципу LIFO(Last in first out) - последним зашел - первым вышел
+Базовые операции стека: push(добавить) pop(извлечь) peak(показать вершину)
+Обратная структура данных для стека - очередь
+
+Задача: Есть математическое выражение удостоверитьсся в правильности расположения скобок в этом выражении
+Например: []()(({})) - правильное выражение, а [(]){}(({})) - выражение неправильное
+Подумайте о стеке
+ */
+    @Override
+    public void onClick(View v) {
+        Repository.fragmentManager.popBackStack();  // закрывае текущий фрагмент
     }
 }

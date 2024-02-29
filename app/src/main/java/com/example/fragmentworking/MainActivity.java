@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
         Repository.fragmentManager = getSupportFragmentManager();  // инициализируем менеджер фагментов
 
-        if(Repository.fragment == null){
+
             Repository.fragment = new MainFragment();
             Repository.fragmentManager.beginTransaction()
                     .add(R.id.fragment_container,Repository.fragment)
                     .commit();
-        }
+
 
     }
 }
