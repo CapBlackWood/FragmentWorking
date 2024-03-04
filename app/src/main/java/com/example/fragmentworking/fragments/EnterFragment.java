@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fragmentworking.MapActivity;
 import com.example.fragmentworking.R;
+import com.example.fragmentworking.Repository;
 import com.example.fragmentworking.adapter.ChooseAdapter;
 import com.example.fragmentworking.models.Model;
 
@@ -28,6 +30,8 @@ public class EnterFragment extends Fragment implements  View.OnTouchListener{
     private FragmentManager fragmentManager;
     private Fragment fragment;
 
+    private Button btnBill;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -39,6 +43,7 @@ public class EnterFragment extends Fragment implements  View.OnTouchListener{
 
     private void init(View view) {                               //Метод для создания начальных значений
         recyclerView = view.findViewById(R.id.list_items);
+        btnBill = view.findViewById(R.id.btn_bill);
         ArrayList<Model> models = new ArrayList<>();                   // Список моделей которые будут выводиться на экран
         models.add(new Model(R.drawable.cocktails, "Напитки"));
         models.add(new Model(R.drawable.menu, "Меню"));
@@ -47,6 +52,17 @@ public class EnterFragment extends Fragment implements  View.OnTouchListener{
         ChooseAdapter adapter = new ChooseAdapter(getActivity(), models);  // Адаптер для связи списками моделей и разметки
         recyclerView.setAdapter(adapter);    //Назначаем адаптер списку разметки
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));   // Назначаем менеджера компановки (способо отображения элементов списка)
+        btnBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Repository.fragment = new BillFragment();
+                Repository.fragmentManager
+                        .beginTransaction()
+                        .addToBackStack("enter")
+                        .replace(R.id.fragment_container, Repository.fragment)
+                        .commit();
+            }
+        });
         adapter.setListener(new ChooseAdapter.OnItemClickListener() {  //Назначаем слушателя списка
             @Override
             public void onItemClick(int position) {

@@ -10,4 +10,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/list_items"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_bill"
+        android:text="Счет"/>
+
 </LinearLayout>

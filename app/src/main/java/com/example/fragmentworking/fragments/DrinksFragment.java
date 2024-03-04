@@ -54,6 +54,7 @@ public class DrinksFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(int position) {
                 orders.add(drinks.get(position));          // Добавляем в заказы напиток
+                Repository.items.add(drinks.get(position)); // ДобавлЯем заказ в глобальное хранилище
                 Toast.makeText(getActivity(), "Сумма заказа: " + String.valueOf(countSum(orders)),
                         Toast.LENGTH_LONG).show();
             }

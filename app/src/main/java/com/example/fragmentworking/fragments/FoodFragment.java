@@ -51,6 +51,7 @@ public class FoodFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(int position) {
                 orders.add(foods.get(position));
+                Repository.items.add(foods.get(position));
                 Toast.makeText(getActivity(),"Сумма заказа: " + String.valueOf(countSum(orders)), Toast.LENGTH_LONG).show();
             }
         });
